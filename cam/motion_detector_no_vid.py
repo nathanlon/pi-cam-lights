@@ -4,6 +4,13 @@ import datetime
 import imutils
 import time
 import cv2
+import socketio
+
+# create a Socket.IO server
+sio = socketio.Server()
+
+# wrap with a WSGI application
+app = socketio.WSGIApp(sio)
 
 camera = PiCamera()
 screenWidth = 320
@@ -22,7 +29,7 @@ print("done warming up")
 
 while True:
 
-	hrs = highResStream.next()
+	hrs = next(highResStream)
 	frame = hrs.array
 	rawCapture.truncate(0)
 	rawCapture.seek(0)
