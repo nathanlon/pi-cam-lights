@@ -12,6 +12,15 @@ sio = socketio.Server()
 # wrap with a WSGI application
 app = socketio.WSGIApp(sio)
 
+@sio.event
+def connect(sid, environ, auth):
+    print('connect ', sid)
+
+@sio.event
+def disconnect(sid):
+    print('disconnect ', sid)
+
+
 camera = PiCamera()
 screenWidth = 320
 camera.resolution = (screenWidth, 240)
@@ -57,7 +66,8 @@ while True:
 		(x, y, w, h) = cv2.boundingRect(c)
 		startLight = round(x/pixelsPerLight)
 		widthLights = round(w/pixelsPerLight)
-		print("x: " + str(startLight) + ", w: " + str(widthLights))		
+		print("x: " + str(startLight) + ", w: " + str(widthLights))
+		sio.emit('motion', {'light': startLight, 'w': str(widthLights)})
 		
 		# cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 		text = "Occupied"
