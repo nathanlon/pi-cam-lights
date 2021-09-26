@@ -1,4 +1,4 @@
-var config = require('/boot/lightconfig.json');
+var config = require('/home/pi/pi-cam-lights/lights/lightconfig.json');
 
 var socket = require('socket.io/node_modules/socket.io-client')(config.server || 'http://sebsmac.local');
 var neopixels = require('rpi-ws281x-native');
