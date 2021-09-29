@@ -5,12 +5,15 @@ import imutils
 import time
 import cv2
 import socketio
+import eventlet
 
 # create a Socket.IO server
 sio = socketio.Server()
 
 # wrap with a WSGI application
 app = socketio.WSGIApp(sio)
+
+eventlet.wsgi.server(eventlet.listen(('', 8000)), app)
 
 @sio.event
 def connect(sid, environ, auth):
