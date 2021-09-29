@@ -1,6 +1,6 @@
 var config = require('/home/pi/pi-cam-lights/lights/lightconfig.json');
 
-var socket = require('socket.io/node_modules/socket.io-client')(config.server || 'http://192.168.1.27');
+var socket = require('socket.io/node_modules/socket.io-client')(config.server || 'ws://192.168.1.27:8000');
 var neopixels = require('rpi-ws281x-native');
 var Colour = require('color');
 var isOnline = require('is-online');
