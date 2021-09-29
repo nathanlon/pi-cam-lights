@@ -1,6 +1,6 @@
 var config = require('/home/pi/pi-cam-lights/lights/lightconfig.json');
 
-var socket = require('socket.io/node_modules/socket.io-client')(config.server || 'http://sebsmac.local');
+var socket = require('socket.io/node_modules/socket.io-client')(config.server || 'http://192.168.1.27');
 var neopixels = require('rpi-ws281x-native');
 var Colour = require('color');
 var isOnline = require('is-online');
@@ -114,14 +114,14 @@ function initialise() {
 	
 	doRainbowStrobe(); 
 	initSocketConnection();
-	setInterval(doRainbowStrobe, 1000/60); 
+	//setInterval(doRainbowStrobe, 1000/60); 
 	startInternetChecks(); 
 }
 function startInternetChecks(){ 
 	isOnline(function(err, online) {
 		if(online) { 
 			internetConnection = true; 
-		} else { 
+		} else {
 			internetConnection = false; 
 		} 
 		setTimeout(startInternetChecks, 1000); 
@@ -168,10 +168,11 @@ function update() {
 }
 
 function initSocketConnection() { 
+	console.log("initting socket connection");
 	socket.on('connect', function(){
 		console.log("connected!");
-		socket.emit('register', {type:'receiver', room:room}); 
-		showMessage('join room '+room); 
+		//socket.emit('register', {type:'receiver', room:room}); 
+		//showMessage('join room '+room); 
 	
 	
 	});
@@ -182,16 +183,11 @@ function initSocketConnection() {
 			console.log("Connected! Your id is "+data.name+" ");
 	});
 
-	socket.on('letter', function(data){
-		//console.log('letter', data);
-		if((data.type =='on') || (data.type =='off')) { 
+	socket.on('motion', function(data){
+		console.log('letter', data);
 		
-			if(lightIndex.hasOwnProperty(data.letter)) { 
-				var pixelnum = lightIndex[data.letter]; 
-				if(data.type=='on') lights[pixelnum].turnLightOn(); 
-				else lights[pixelnum].turnLightOff(); 
-			}
-		}
+		lights[data.light].turnLightOn(); 
+		//else lights[pixelnum].turnLightOff(); 
 
 		lastMessageTime = Date.now();
 
