@@ -50,8 +50,8 @@ def greeting_handle(ws):
 	print("done warming up")
 
 	while True:
-		message = ws.wait()
-		if message is None: break
+		# message = ws.wait()
+		# if message is None: break
 
 		hrs = next(highResStream)
 		frame = hrs.array
