@@ -26,13 +26,13 @@ def greeting_handle(ws):
 
 	print("Got here")
 
-	while True:
-		message = ws.wait()
-		if message is None: break
+	# while True:
+	# 	message = ws.wait()
+	# 	if message is None: break
 
-		#data = json.loads(message)
-		ws.send(json.dumps({'greeting', 44}))
-	return
+	# 	#data = json.loads(message)
+	# 	ws.send(json.dumps({'greeting', 44}))
+	# return
 
 	camera = PiCamera()
 	screenWidth = 320
