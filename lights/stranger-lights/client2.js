@@ -6,10 +6,11 @@ var isOnline = require('is-online');
 var exec = require('child_process').exec;
 
 import { client as WebSocketClient} from 'websocket'
-import { host, port, wsApi, iters } from '../config'
+import { host, port, wsApi, iters, lightConfig, colours, lightColours } from '../config'
 import { 
-    Deferred,
+    Deferred,s
     createRequester,
+    log
 } from '../utils'
 
 var NUM_LEDS = 50,
@@ -24,72 +25,9 @@ var lastMessageTime = 0;
 var socket; 
 var room = config.room || 'default';
 var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
-var lightIndex = config.lightIndex || {
-	A : 42, 
-	B : 43, 
-	C : 44, 
-	D : 45, 
-	E : 46, 
-	F : 47, 
-	G : 48, 
-	H : 49, 
-	I : 40, 
-	J : 39, 
-	K : 38, 
-	L : 37, 
-	M : 36, 
-	N : 35, 
-	O : 34, 
-	P : 33, 
-	Q : 32, 
-	R : 22,
-	S : 23,
-	T : 24,
-	U : 25,
-	V : 26,
-	W : 27,
-	X : 28,
-	Y : 29,
-	Z : 30
+var lightIndex = config.lightIndex;
 
-}; 
-
-var colours = {
-	white : {h:20, s:80, l:80},
-	blue : {h:185, s:100, l:50},
-	red : {h:350, s:80, l:50},
-	green : {h:160, s:90, l:50},
-	yellow : {h:35, s:100, l:60},
-}
-var lightColours = [ 
-	'white', 	// A
-	'blue', 	// B
-	'red', 		// C
-	'green', 	// D
-	'blue', 	// E
-	'yellow', 	// F
-	'red',		// G
-	'green',	// H
-	'green',	// I
-	'red',		// J
-	'blue',		// K
-	'green', 	// L
-	'yellow',	// M
-	'red',		// N
-	'red', 		// O
-	'green', 	// P
-	'red', 		// Q
-	'green',	// R
-	'white',	// S
-	'yellow', 	// T
-	'blue', 	// U
-	'red',		// V
-	'blue',		// W
-	'yellow',	// X
-	'red',		// Y
-	'red', 		// Z
-	
-];
+var 
 var lightColoursByIndex = []; 
 
 for(var i = 0; i<NUM_LEDS; i++) { 
