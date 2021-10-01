@@ -24,7 +24,14 @@ from eventlet import wsgi, websocket
 def greeting_handle(ws):
 
 	print("Got here")
-	return "Testing"
+
+	while True:
+		message = ws.wait()
+		if message is None: break
+
+		data = json.loads(message)
+		ws.send(json.dumps({'greeting', 44}))
+	return
 
 	camera = PiCamera()
 	screenWidth = 320
