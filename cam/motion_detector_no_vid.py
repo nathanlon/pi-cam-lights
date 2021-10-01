@@ -24,7 +24,7 @@ from eventlet import wsgi, websocket
 def greeting_handle(ws):
 
 	print("Got here")
-	return
+	return "Testing"
 
 	camera = PiCamera()
 	screenWidth = 320
