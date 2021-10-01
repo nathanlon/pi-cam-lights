@@ -22,6 +22,9 @@ from eventlet import wsgi, websocket
 #     print('disconnect ', sid)
 
 def greeting_handle(ws):
+
+	print("Got here")
+
 	camera = PiCamera()
 	screenWidth = 320
 	camera.resolution = (screenWidth, 240)
