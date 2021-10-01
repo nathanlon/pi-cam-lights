@@ -84,7 +84,7 @@ def greeting_handle(ws):
 			widthLights = round(w/pixelsPerLight)
 			print("x: " + str(startLight) + ", w: " + str(widthLights))
 			# sio.emit('motion', {'light': startLight, 'w': str(widthLights)})
-			ws.send(json.dumps({ 'greeting': startLight }))
+			ws.send(json.dumps({ 'greeting': {'s': startLight, 'w': str(widthLights) }}))
 			
 			# cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 			text = "Occupied"
