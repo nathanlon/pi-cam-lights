@@ -26,7 +26,7 @@ def greeting_handle(ws):
 	print("Got here")
 
 	while True:
-		#message = ws.wait()
+		message = ws.wait()
 
 		#data = json.loads(message)
 		ws.send(json.dumps({'greeting', 44}))
@@ -100,7 +100,7 @@ def greeting_handle(ws):
 
 def site(env, start_response):
     if env['PATH_INFO'] == '/greeting':
-        return greeting_handle(start_response)
+        return greeting_handle(env)
     else:
         start_response('200 OK', [('Content-Type', 'text/plain')])
         return ['Eventlet running...']
