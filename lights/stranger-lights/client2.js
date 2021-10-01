@@ -4,19 +4,18 @@ var isOnline = require('is-online');
 var exec = require('child_process').exec;
 
 var WebSocketClient = require('websocket').client;
-var client = new WebSocketClient();
 
-var wsApi = 'ws://0.0.0.0:8000/greeting'
+const wsApi = 'ws://192.168.1.27:8000/greeting';
 
-var colours = {
+const colours = {
     white : {h:20, s:80, l:80},
     blue : {h:185, s:100, l:50},
     red : {h:350, s:80, l:50},
     green : {h:160, s:90, l:50},
     yellow : {h:35, s:100, l:60},
-}
+};
 
-var utils = require('../utils');
+var utils = require('../utils.js');
 
 var NUM_LEDS = 50,
 	pixelData = new Uint32Array(NUM_LEDS),
@@ -56,22 +55,8 @@ var currentSenderName = "";
 initialise(); 
 
 function initialise() { 
-	
-	doRainbowStrobe(); 
-	//initSocketConnection();
+	doRainbowStrobe();
 	runTest();
-	//setInterval(doRainbowStrobe, 1000/60); 
-	startInternetChecks(); 
-}
-function startInternetChecks(){ 
-	isOnline(function(err, online) {
-		if(online) { 
-			internetConnection = true; 
-		} else {
-			internetConnection = false; 
-		} 
-		setTimeout(startInternetChecks, 1000); 
-	});
 }
 
 // ---- animation-loop
@@ -113,43 +98,20 @@ function update() {
 }
 
 async function runTest() {
-    log("connecting");
+    console.log("connecting");
     
-    const connect = new Deferred()
-    const client = new WebSocketClient()
+    const client = new WebSocketClient();
 
-    client.on('connect', connection => connect.resolve(connection))
-    client.on('connectFailed', err => connect.reject(err))
+    client.on('connect', connection => {
+        connection.on('message', message => {
+			var object = JSON.parse(message.utf8Data);
+			//console.dir(message, {depth: null, colors: true})
 
-    client.connect(wsApi)
-
-    try {
-        const connection = await connect.promise
-
-        const requester = createRequester(data => connection.sendUTF(data))
-        connection.on('message', message => requester.incoming.resolve(message))
-
-        let i = iters
-        await (async function asyncLoop() {
-            const sendData = JSON.stringify({ name: randomName() })
-            const message = await requester.greeting(sendData)
-            const data = JSON.parse(message.utf8Data)
-            const { greeting } = data
-
-            if (--i === 0) {
-                log(`Last greeting: ${greeting}`)
-                return
-            }
-    
-            await asyncLoop()
-        })()
-
-        // https://www.iana.org/assignments/websocket/websocket.xhtml#close-code-number
-        connection.close(1000, 'Done testing')
+			console.log("start " + object.greeting.s + "width " + object.greeting.w);
+        });
+    });
         
-    } catch(err) {
-        logError(err)
-    }
+    client.connect(wsApi)
 }
 
 var lightConfig = {
