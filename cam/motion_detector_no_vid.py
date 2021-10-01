@@ -26,10 +26,9 @@ def greeting_handle(ws):
 	print("Got here")
 
 	while True:
-		message = ws.wait()
-		if message is None: break
+		#message = ws.wait()
 
-		data = json.loads(message)
+		#data = json.loads(message)
 		ws.send(json.dumps({'greeting', 44}))
 	return
 
