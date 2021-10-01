@@ -93,7 +93,7 @@ def greeting_handle(ws):
 
 def site(env, start_response):
     if env['PATH_INFO'] == '/greeting':
-        return greeting_handle(env, start_response)
+        return greeting_handle(start_response)
     else:
         start_response('200 OK', [('Content-Type', 'text/plain')])
         return ['Eventlet running...']
