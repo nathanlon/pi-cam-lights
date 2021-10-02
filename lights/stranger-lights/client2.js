@@ -23,8 +23,7 @@ neopixels.init(NUM_LEDS);
 neopixels.render(pixelData);
 
 var lastMessageTime = 0; 
-var socket; 
-var room = config.room || 'default';
+var socket;
 var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
 var lightIndex = config.lightIndex;
 
@@ -106,6 +105,25 @@ async function runTest() {
 			//console.dir(message, {depth: null, colors: true})
 
 			console.log("start " + object.greeting.s + "width " + object.greeting.w);
+
+			var flickerLight = object.greeting.s;
+
+			//var flickerLight = Math.floor(Math.random()*lights.length*100); 
+		
+		
+			for(var i = 0; i<lights.length; i++) { 
+				var light=lights[i];
+				if(dimmed && (flickerLight==i)) light.startFlicker(0.5);
+				light.update(); 
+				if(light.changed) {
+					pixelData[i] = lights[i].getColour(); 
+					lightsChanged = true; 
+				}
+			}
+			if(lightsChanged) {
+				updatePixels(); 
+				lightsChanged = false; 
+			}
         });
     });
         
