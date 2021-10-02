@@ -170,7 +170,7 @@ async function runTest() {
 			for(var i = 0; i<lights.length; i++) { 
 				var light=lights[i];
 				if(dimmed && (flickerLight==i)) {
-					light.startFlicker(0.95);
+					light.turnLightOn();
 				} else {
 					light.turnLightOff();
 				}
@@ -309,7 +309,7 @@ function Light( colour) {
 	this.turnLightOn = function() { 
 		if(!lightOn) {
 			lightOn = true; 
-			//this.brightness = 1.5; 
+			this.brightness = 1.5; //may comment out
 			turnOnTime = Date.now(); 
 		} 
 	}
