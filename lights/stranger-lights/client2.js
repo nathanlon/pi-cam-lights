@@ -316,6 +316,7 @@ function Light( colour) {
 	this.turnLightOff =function() { 
 		if(lightOn) { 
 			lightOn = false; 
+			this.brightness = 0;
 			var framessinceturnon = Math.floor((Date.now()-turnOnTime)/16); // 16 mils per frame
 			if(framessinceturnon<3) { 
 				turnOffDelay = 3; 
