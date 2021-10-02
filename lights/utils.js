@@ -1,6 +1,4 @@
 
-export const log = console.log
-
 // Would be great to have Promise.defer :_(
 export class Deferred {
   resolve = null
