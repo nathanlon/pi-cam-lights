@@ -162,7 +162,7 @@ async function runTest() {
 
 			console.log("start " + object.greeting.s + "width " + object.greeting.w);
 
-			var flickerLight = 20;//object.greeting.s;
+			var flickerLight = object.greeting.s;
 
 			//var flickerLight = Math.floor(Math.random()*lights.length*100); 
 		
@@ -174,7 +174,7 @@ async function runTest() {
 				} else {
 					light.turnLightOff();
 				}
-				light.update(); 
+				//light.update(); 
 				if(light.changed) {
 					pixelData[i] = lights[i].getColour(); 
 					lightsChanged = true; 
