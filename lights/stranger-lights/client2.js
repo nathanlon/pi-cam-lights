@@ -310,17 +310,19 @@ function Light( colour) {
 		if(!lightOn) {
 			lightOn = true; 
 			this.brightness = 1.5; //may comment out
-			turnOnTime = Date.now(); 
+			turnOnTime = Date.now();
+			this.changed = true;
 		} 
 	}
 	this.turnLightOff =function() { 
 		if(lightOn) { 
 			lightOn = false; 
 			this.brightness = 0;
-			var framessinceturnon = Math.floor((Date.now()-turnOnTime)/16); // 16 mils per frame
-			if(framessinceturnon<3) { 
-				turnOffDelay = 3; 
-			}
+			// var framessinceturnon = Math.floor((Date.now()-turnOnTime)/16); // 16 mils per frame
+			// if(framessinceturnon<3) { 
+			// 	turnOffDelay = 3; 
+			// }
+			this.changed = true;
 		}
 	}
 	
