@@ -15,8 +15,6 @@ const colours = {
     yellow : {h:35, s:100, l:60},
 };
 
-var utils = require('../utils.js');
-
 var NUM_LEDS = 50,
 	pixelData = new Uint32Array(NUM_LEDS),
 	pixelDataProcessed = new Uint32Array(NUM_LEDS);
