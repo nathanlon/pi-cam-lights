@@ -21,34 +21,26 @@ from eventlet import wsgi, websocket
 # @sio.event
 # def disconnect(sid):
 #     print('disconnect ', sid)
+isInitialised = false
+camera = PiCamera()
+screenWidth = 320
+camera.resolution = (screenWidth, 240)
+camera.framerate = 10
+rawCapture = PiRGBArray(camera)
+lightCount = 50
+pixelsPerLight = round(screenWidth / lightCount)
+firstFrame = None
+
+highResStream = camera.capture_continuous(rawCapture, format="bgr", use_video_port=True)
+
+print("done warming up")
 
 @websocket.WebSocketWSGI
 def greeting_handle(ws):
 
-	print("Got here")
-
-	# while True:
-	# 	message = ws.wait()
-	# 	if message is None: break
-
-	# 	#data = json.loads(message)
-	# 	ws.send(json.dumps({'greeting', 44}))
-	# return
-
-	camera = PiCamera()
-	screenWidth = 320
-	camera.resolution = (screenWidth, 240)
-	camera.framerate = 10
-	rawCapture = PiRGBArray(camera)
-	lightCount = 50
-	pixelsPerLight = round(screenWidth / lightCount)
-	firstFrame = None
-
-	highResStream = camera.capture_continuous(rawCapture, format="bgr", use_video_port=True)
+	print("Connected")
 
 	time.sleep(2.0)
-
-	print("done warming up")
 
 	while True:
 		# message = ws.wait()
