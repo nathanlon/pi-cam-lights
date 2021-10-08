@@ -163,13 +163,14 @@ async function runTest() {
 			console.log("start " + object.greeting.s + "width " + object.greeting.w);
 
 			var flickerLight = object.greeting.s;
+			var width = object.greeting.w;
 
 			//var flickerLight = Math.floor(Math.random()*lights.length*100); 
 		
 		
 			for(var i = 0; i<lights.length; i++) { 
 				var light=lights[i];
-				if(dimmed && (flickerLight==i)) {
+				if(dimmed && (flickerLight<=i) && (flickerLight+width>=i)) {
 					light.turnLightOn();
 				} else {
 					light.turnLightOff();
