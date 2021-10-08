@@ -29,7 +29,6 @@ camera.framerate = 10
 rawCapture = PiRGBArray(camera)
 lightCount = 50
 pixelsPerLight = round(screenWidth / lightCount)
-firstFrame = None
 
 highResStream = camera.capture_continuous(rawCapture, format="bgr", use_video_port=True)
 
@@ -37,7 +36,7 @@ print("done warming up")
 
 @websocket.WebSocketWSGI
 def greeting_handle(ws):
-
+	firstFrame = None
 	print("Connected")
 
 	time.sleep(2.0)
