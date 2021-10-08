@@ -21,7 +21,7 @@ from eventlet import wsgi, websocket
 # @sio.event
 # def disconnect(sid):
 #     print('disconnect ', sid)
-isInitialised = false
+isInitialised = False
 camera = PiCamera()
 screenWidth = 320
 camera.resolution = (screenWidth, 240)
