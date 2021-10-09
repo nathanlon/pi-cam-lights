@@ -169,7 +169,7 @@ async function runTest() {
 			for(var i = 0; i<lights.length; i++) { 
 				var light=lights[i];
 
-				if(dimmed && (i>=flickerLight) && (i<=lightPlusWidth)) {
+				if((i==flickerLight) || (i==lightPlusWidth)) {
 					light.turnLightOn();
 				} else {
 					light.turnLightOff();
