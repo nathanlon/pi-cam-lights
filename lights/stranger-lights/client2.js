@@ -250,7 +250,7 @@ function Light( colour) {
 	this.turnLightOn = function() { 
 		if(!lightOn) {
 			lightOn = true; 
-			this.brightness = 1.5; //may comment out
+			this.brightness = 1; //may comment out
 			turnOnTime = Date.now();
 			this.changed = true;
 		} 
