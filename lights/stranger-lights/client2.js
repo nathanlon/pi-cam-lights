@@ -137,10 +137,10 @@ async function runTest() {
 					light.turnLightOff();
 				}
 				//light.update(); 
-				if(light.changed) {
+				//if(light.changed) {
 					pixelData[i] = lights[i].getColour(); 
 					lightsChanged = true; 
-				}
+				//}
 			}
 			if(lightsChanged) {
 				updatePixels(); 
