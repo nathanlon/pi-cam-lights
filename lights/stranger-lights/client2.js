@@ -165,12 +165,9 @@ async function runTest() {
 			var flickerLight = object.greeting.s;
 			var width = object.greeting.w;
 
-			//var flickerLight = Math.floor(Math.random()*lights.length*100); 
-		
-		
 			for(var i = 0; i<lights.length; i++) { 
 				var light=lights[i];
-				if(dimmed && (flickerLight<=i) && (flickerLight+width>=i)) {
+				if(dimmed && (flickerLight>=i) && (flickerLight+width<=i)) {
 					light.turnLightOn();
 				} else {
 					light.turnLightOff();
@@ -191,63 +188,6 @@ async function runTest() {
     client.connect(wsApi)
 }
 
-
-// function initSocketConnection() { 
-// 	console.log("initting socket connection");
-// 	socket.on('connect', function(){
-// 		console.log("connected!");
-// 		//socket.emit('register', {type:'receiver', room:room}); 
-// 		//showMessage('join room '+room); 
-	
-	
-// 	});
-
-
-// 	socket.on('registered', function(data) { 
-// 			console.log('registered', data); 
-// 			console.log("Connected! Your id is "+data.name+" ");
-// 	});
-
-// 	socket.on('motion', function(data){
-// 		console.log('letter', data);
-		
-// 		lights[data.light].turnLightOn(); 
-// 		//else lights[pixelnum].turnLightOff(); 
-
-// 		lastMessageTime = Date.now();
-
-// 	});
-// 	socket.on('resetletters', function(){
-// 		console.log('resetlights');
-
-// 		for(var i = 0; i<lights.length; i++) { 
-// 			lights[i].turnLightOff(); 
-// 			lights[i].startFlicker(); 
-// 		} 
-
-// 		lastMessageTime = Date.now();
-
-// 	});
-	
-// 	socket.on('status', function(data) { 
-// 		if(data.currentControllerName=="") dimmed = true; 
-// 		else dimmed = false; 
-// 	});
-
-// 	socket.on('disconnect', function(){
-	
-// 	});
-	
-// 	socket.on('reboot', function() { 
-// 		console.log("REBOOT!"); 
-// 		execute('/sbin/reboot', function(callback){
-// 	    	console.log(callback);
-// 		});
-// 	});
-	
-// }
-
-
 function updatePixels() { 
 	for(var i = 0; i<NUM_LEDS; i++) { 
 		var pixel = pixelData[i]; 
@@ -262,8 +202,6 @@ function updatePixels() {
 	}
 	neopixels.render(pixelDataProcessed);
 }
-
-
 
 function Light( colour) { 
 	
