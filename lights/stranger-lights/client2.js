@@ -112,44 +112,6 @@ function initialise() {
 	runTest();
 }
 
-// // ---- animation-loop
-
-// function update() {
-	
-// 	if(!socket.connected) { 
-// 		var hue = 135; 
-// 		if(!internetConnection) hue = 0; 
-// 		for(var i = 0; i<lights.length; i++) { 
-// 			if((i==0) || (i==lights.length-1)) {
-// 				pixelData[i] = Colour().hsl(hue,100,(Math.sin(Date.now()*0.01)*0.5+0.5)*50).rgbNumber(); 
-// 			} else { 
-// 				pixelData[i] = 0;	
-// 			}
-// 		}
-// 		updatePixels();
-// 		lightsChanged = true; 
-// 		dimmed = true; 
-// 	} else { 
-
-// 		var flickerLight = Math.floor(Math.random()*lights.length*100); 
-		
-		
-// 		for(var i = 0; i<lights.length; i++) { 
-// 			var light=lights[i];
-// 			if(dimmed && (flickerLight==i)) light.startFlicker(0.5);
-// 			light.update(); 
-// 			if(light.changed) {
-// 				pixelData[i] = lights[i].getColour(); 
-// 				lightsChanged = true; 
-// 			}
-// 		}
-// 		if(lightsChanged) {
-// 			updatePixels(); 
-// 			lightsChanged = false; 
-// 		}
-// 	}
-// }
-
 async function runTest() {
     console.log("connecting");
     
@@ -175,10 +137,10 @@ async function runTest() {
 					light.turnLightOff();
 				}
 				//light.update(); 
-				//if(light.changed) {
+				if(light.changed) {
 					pixelData[i] = lights[i].getColour(); 
 					lightsChanged = true; 
-				//}
+				}
 			}
 			if(lightsChanged) {
 				updatePixels(); 
