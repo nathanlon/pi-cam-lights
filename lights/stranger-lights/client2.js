@@ -122,11 +122,12 @@ async function runTest() {
 			var object = JSON.parse(message.utf8Data);
 			//console.dir(message, {depth: null, colors: true})
 
-			console.log("start " + object.greeting.s + "width " + object.greeting.w);
 
 			var flickerLight = object.greeting.s;
 			var width = object.greeting.w;
 			var lightPlusWidth = flickerLight + width;
+
+			console.log("start " + object.greeting.s + "widthplus " + lightPlusWidth);
 
 			for(var i = 0; i<lights.length; i++) { 
 				var light=lights[i];
@@ -137,10 +138,10 @@ async function runTest() {
 					light.turnLightOff();
 				}
 				//light.update(); 
-				//if(light.changed) {
+				if(light.changed) {
 					pixelData[i] = lights[i].getColour(); 
 					lightsChanged = true; 
-				//}
+				}
 			}
 			if(lightsChanged) {
 				updatePixels(); 
