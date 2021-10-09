@@ -27,8 +27,15 @@ def greeting_handle(ws):
 	print("Connected")
 
 	time.sleep(2.0)
+	count = 1
 
 	while True:
+		count = count + 1
+		if count > 5:
+			count = 1
+		else:
+			continue
+
 		hrs = next(highResStream)
 		frame = hrs.array
 		rawCapture.truncate(0)
@@ -59,10 +66,7 @@ def greeting_handle(ws):
 			startLight = round(x/pixelsPerLight)
 			widthLights = round(w/pixelsPerLight)
 			print("x: " + str(startLight) + ", w: " + str(widthLights))
-			count = count + 1
-			if count > 10:
-				ws.send(json.dumps({ 'greeting': {'s': startLight, 'w': str(widthLights) }}))
-				count = 1
+			ws.send(json.dumps({ 'greeting': {'s': startLight, 'w': str(widthLights) }}))
 
 		key = cv2.waitKey(1) & 0xFF
 
