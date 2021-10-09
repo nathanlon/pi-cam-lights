@@ -125,7 +125,7 @@ async function runTest() {
 
 			var flickerLight = object.greeting.s;
 			var width = object.greeting.w;
-			var lightPlusWidth = flickerLight + width;
+			var lightPlusWidth = parseInt(flickerLight) + parseInt(width);
 
 			console.log("start " + object.greeting.s + "widthplus " + lightPlusWidth);
 
