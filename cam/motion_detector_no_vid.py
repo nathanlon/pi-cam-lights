@@ -91,6 +91,17 @@ def greeting_handle(ws):
 		if key == ord("q"):
 			break
 
+	startLight = 1
+	widthLights = 1
+
+	while True:
+		startLight = startLight + 1
+		widthLights = widthLights + 1
+		print("x: " + str(startLight) + ", w: " + str(widthLights))
+		ws.send(json.dumps({ 'greeting': {'s': startLight, 'w': str(widthLights) }}))
+		time.sleep(1)
+
+
 
 def site(env, start_response):
     if env['PATH_INFO'] == '/greeting':
