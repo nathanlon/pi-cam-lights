@@ -163,16 +163,16 @@ async function runTest() {
 			console.log("start " + object.greeting.s + "width " + object.greeting.w);
 
 			var flickerLight = object.greeting.s;
-			var width = object.greeting.w;
-			var lightPlusWidth = flickerLight + width
+			var width = 5;//object.greeting.w;
+			var lightPlusWidth = flickerLight + width;
 
 			for(var i = 0; i<lights.length; i++) { 
 				var light=lights[i];
 
-				if((i==flickerLight) || (i==lightPlusWidth)) {
+				if((i>=flickerLight) && (i<=lightPlusWidth)) {
 					light.turnLightOn();
 				} else {
-					light.turnLightOff();
+					//light.turnLightOff();
 				}
 				//light.update(); 
 				if(light.changed) {
