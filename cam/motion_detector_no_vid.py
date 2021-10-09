@@ -27,12 +27,13 @@ def greeting_handle(ws):
 	print("Connected")
 
 	time.sleep(2.0)
-	count = 1
+	num = 1
 
 	while True:
-		count = count + 1
-		if count > 100:
-			count = 1
+		num = num + 1
+		if num > 100:
+			num = 1
+			time.sleep(0.5)
 		else:
 			continue
 
