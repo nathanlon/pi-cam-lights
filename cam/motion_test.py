@@ -17,6 +17,7 @@ def greeting_handle(ws):
 
 	time.sleep(2.0)
 
+	lightCount = 50
 	startLight = 1
 	widthLights = 1
 
