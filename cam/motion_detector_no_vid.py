@@ -31,7 +31,7 @@ def greeting_handle(ws):
 
 	while True:
 		count = count + 1
-		if count > 5:
+		if count > 20:
 			count = 1
 		else:
 			continue
