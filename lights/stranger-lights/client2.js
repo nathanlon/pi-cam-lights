@@ -164,7 +164,7 @@ async function runTest() {
 
 			var flickerLight = object.greeting.s;
 			var width = object.greeting.w;
-			var lightPlusWidth = 5;//flickerLight + width;
+			var lightPlusWidth = flickerLight + width;
 
 			for(var i = 0; i<lights.length; i++) { 
 				var light=lights[i];
