@@ -50,6 +50,7 @@ def greeting_handle(ws):
 		cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 		cnts = imutils.grab_contours(cnts)
 
+		count = 1
 		for c in cnts:
 			if cv2.contourArea(c) < 500:
 				continue
@@ -58,7 +59,10 @@ def greeting_handle(ws):
 			startLight = round(x/pixelsPerLight)
 			widthLights = round(w/pixelsPerLight)
 			print("x: " + str(startLight) + ", w: " + str(widthLights))
-			ws.send(json.dumps({ 'greeting': {'s': startLight, 'w': str(widthLights) }}))
+			count = count + 1
+			if count > 10:
+				ws.send(json.dumps({ 'greeting': {'s': startLight, 'w': str(widthLights) }}))
+				count = 1
 
 		key = cv2.waitKey(1) & 0xFF
 
