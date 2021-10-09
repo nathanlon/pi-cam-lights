@@ -100,7 +100,9 @@ def greeting_handle(ws):
 		print("x: " + str(startLight) + ", w: " + str(widthLights))
 		ws.send(json.dumps({ 'greeting': {'s': startLight, 'w': str(widthLights) }}))
 		time.sleep(1)
-
+		if startLight > lightCount:
+			startLight = 1
+			widthLights = 1
 
 
 def site(env, start_response):

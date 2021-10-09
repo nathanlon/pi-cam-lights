@@ -1,0 +1,1 @@
+sudo /bin/python3 /home/pi/pi-cam-lights/cam/motion_detector_no_vid.py & > /home/pi/log`date "+%Y-%m-%d"`.txt 2>&1

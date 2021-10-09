@@ -1,0 +1,1 @@
+sudo /bin/node /home/pi/pi-cam-lights/lights/stranger-lights/client2.js & > /home/pi/log/log`date "+%Y-%m-%d"`.txt 2>&1
