@@ -26,7 +26,7 @@ def greeting_handle(ws):
 		widthLights = widthLights + 1
 		print("x: " + str(startLight) + ", w: " + str(widthLights))
 		ws.send(json.dumps({ 'greeting': {'s': startLight, 'w': str(widthLights) }}))
-		time.sleep(0.1)
+		time.sleep(1)
 		if startLight > lightCount:
 			startLight = 1
 			widthLights = 1
