@@ -172,13 +172,13 @@ async function runTest() {
 				if((i>=flickerLight) && (i<=lightPlusWidth)) {
 					light.turnLightOn();
 				} else {
-					//light.turnLightOff();
+					light.turnLightOff();
 				}
 				//light.update(); 
-				if(light.changed) {
+				//if(light.changed) {
 					pixelData[i] = lights[i].getColour(); 
 					lightsChanged = true; 
-				}
+				//}
 			}
 			if(lightsChanged) {
 				updatePixels(); 
