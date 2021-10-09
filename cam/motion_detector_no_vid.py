@@ -33,7 +33,7 @@ def greeting_handle(ws):
 		num = num + 1
 		if num > 100:
 			num = 1
-			time.sleep(0.5)
+			time.sleep(0.1)
 		else:
 			continue
 
