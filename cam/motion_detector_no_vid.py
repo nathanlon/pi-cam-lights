@@ -8,19 +8,6 @@ import json
 import eventlet
 from eventlet import wsgi, websocket
 
-# # create a Socket.IO server
-# sio = socketio.Server()
-
-# # wrap with a WSGI application
-# app = socketio.WSGIApp(sio)
-
-# @sio.event
-# def connect(sid, environ, auth):
-#     print('connect ', sid)
-
-# @sio.event
-# def disconnect(sid):
-#     print('disconnect ', sid)
 isInitialised = False
 camera = PiCamera()
 screenWidth = 320
@@ -42,9 +29,6 @@ def greeting_handle(ws):
 	time.sleep(2.0)
 
 	while True:
-		# message = ws.wait()
-		# if message is None: break
-
 		hrs = next(highResStream)
 		frame = hrs.array
 		rawCapture.truncate(0)
@@ -74,35 +58,12 @@ def greeting_handle(ws):
 			startLight = round(x/pixelsPerLight)
 			widthLights = round(w/pixelsPerLight)
 			print("x: " + str(startLight) + ", w: " + str(widthLights))
-			# sio.emit('motion', {'light': startLight, 'w': str(widthLights)})
 			ws.send(json.dumps({ 'greeting': {'s': startLight, 'w': str(widthLights) }}))
-			
-			# cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-			text = "Occupied"
 
-		# cv2.putText(frame, "Room Status: {}".format(text), (10, 20),
-		#	cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
-
-		# cv2.imshow("Security Feed", frame)
-		# cv2.imshow("Thresh", thresh)
-		# cv2.imshow("Frame Delta", frameDelta)
 		key = cv2.waitKey(1) & 0xFF
 
 		if key == ord("q"):
 			break
-
-	startLight = 1
-	widthLights = 1
-
-	while True:
-		startLight = startLight + 1
-		widthLights = widthLights + 1
-		print("x: " + str(startLight) + ", w: " + str(widthLights))
-		ws.send(json.dumps({ 'greeting': {'s': startLight, 'w': str(widthLights) }}))
-		time.sleep(1)
-		if startLight > lightCount:
-			startLight = 1
-			widthLights = 1
 
 
 def site(env, start_response):
