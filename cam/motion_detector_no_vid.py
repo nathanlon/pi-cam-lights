@@ -54,8 +54,9 @@ def greeting_handle(ws):
 			continue
 
 		end = time.time()
-		if ((end - start) >= 60):
+		if ((end - start) >= 120):
 			print("Resetting frame")
+			start = time.time()
 			firstFrame = gray
 			continue
 
