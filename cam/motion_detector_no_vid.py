@@ -19,6 +19,7 @@ pixelsPerLight = round(screenWidth / lightCount)
 
 highResStream = camera.capture_continuous(rawCapture, format="bgr", use_video_port=True)
 
+
 print("done warming up")
 
 @websocket.WebSocketWSGI
@@ -48,6 +49,13 @@ def greeting_handle(ws):
 		gray = cv2.GaussianBlur(gray, (21,21), 0)
 
 		if firstFrame is None:
+			start = time.time()
+			firstFrame = gray
+			continue
+
+		end = time.time()
+		if ((end - start) >= 60):
+			print("Resetting frame")
 			firstFrame = gray
 			continue
 
